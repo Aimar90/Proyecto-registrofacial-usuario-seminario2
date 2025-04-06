@@ -8,7 +8,8 @@ class Perfil(db.Model):
     rol = db.Column(db.String(50), nullable=False)
     estado_rostro = db.Column(db.String(50), nullable=False)
     creado_en = db.Column(db.DateTime, default=datetime.utcnow)
-    telefono = db.Column(db.String(20))  # Campo adicional propuesto
+    telefono = db.Column(db.String(20)) 
+    creaddo_en = db.Column(db.DateTime, default=datetime.utcnow)  
 
     usuario_id = db.Column(db.String(36), db.ForeignKey('usuarios.id'), unique=True, nullable=False)
     usuario = db.relationship('Usuario', back_populates='perfil')
@@ -18,5 +19,6 @@ class Perfil(db.Model):
             'rol': self.rol,
             'estado_rostro': self.estado_rostro,
             'creado_en': self.creado_en.isoformat(),
-            'telefono': self.telefono
+            'telefono': self.telefono,
+            'creaddo_en': self.creado_en.isoformat() if self.creado_en else None,
         }
